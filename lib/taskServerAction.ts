@@ -1,8 +1,8 @@
-"use server";
+"use server"
 
 import connectMongo from '@/lib/connectDB';
 import Tasks from '@/model/task';
-import { DayTasks, Task } from '@/types'; // Assuming Task type is defined
+import {  Task } from '@/types'; // Assuming Task type is defined
 
 export interface ServerActionResult {
   success: boolean;
@@ -39,14 +39,18 @@ export async function createTaskAction(taskData:Partial<Task>): Promise<ServerAc
   }
 }
 
+function startOfDay(date: Date): Date {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+} 
+
 export async function getTasksAction({
   firstDate,
   endDate,
   selectedDate,
 }: {
-  firstDate?: Date;
-  endDate?: Date;
-  selectedDate?: Date;
+  firstDate?: Date,
+  endDate?: Date,
+  selectedDate?: Date
 }): Promise<ServerActionResult> {
   try {
     await connectMongo();
@@ -91,10 +95,6 @@ export async function getTasksAction({
     console.error("Error fetching tasks:", error);
     return { success: false, error: "Failed to fetch tasks." };
   }
-}
-
-function startOfDay(date: Date): Date {
-  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 }
 
 export async function updateTaskCompletionAction(taskId: string, completedStatus: boolean, completedTaskNotes: string): Promise<ServerActionResult> {

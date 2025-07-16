@@ -28,13 +28,18 @@ export function TaskList({ selectedDate, tasks, isLoading, onShowNotification }:
   const [showModalBox, setShowModalBox] = useState(false);
   const [completedTaskNoteInput, setCompletedTaskNoteInput] = useState('');
   
-  const [newTask, setNewTask] = useState({
+  const [newTask, setNewTask] = useState<{
+    title: string;
+    description: string;
+    priority: 'low' | 'medium' | 'high'; // 👈 constrain here
+    category: string;
+  }>({
     title: '',
     description: '',
     priority: 'medium',
     category: 'Personal',
   });
-
+  
   const stats: TaskStats = {
     total: tasks.length,
     completed: tasks.filter(t => t.completed).length,
@@ -52,8 +57,8 @@ export function TaskList({ selectedDate, tasks, isLoading, onShowNotification }:
       setNewTask({ title: '', description: '', priority: 'medium', category: 'Personal' });
       setShowAddForm(false);
       onShowNotification('success', 'Task added successfully!');
-      queryClient.invalidateQueries(['tasks']);
-      queryClient.invalidateQueries(['taskuntiltoday']);
+      queryClient.invalidateQueries({ queryKey: ['tasks'] });
+      queryClient.invalidateQueries({ queryKey: ['taskuntiltoday'] });
     },
     onError: (error: any) => {
       onShowNotification('error', 'Error adding task');
@@ -71,8 +76,8 @@ export function TaskList({ selectedDate, tasks, isLoading, onShowNotification }:
         return;
       }
       onShowNotification('success', 'Task updated successfully!');
-      queryClient.invalidateQueries(['tasks']);
-      queryClient.invalidateQueries(['taskuntiltoday']);
+      queryClient.invalidateQueries({ queryKey: ['tasks'] });
+      queryClient.invalidateQueries({ queryKey: ['taskuntiltoday'] });
     },
     onError: (error: any) => {
       onShowNotification('error', 'Error updating task');
@@ -88,8 +93,8 @@ export function TaskList({ selectedDate, tasks, isLoading, onShowNotification }:
         return;
       }
       onShowNotification('success', 'Task deleted successfully!');
-      queryClient.invalidateQueries(['tasks']);
-      queryClient.invalidateQueries(['taskuntiltoday']);
+      queryClient.invalidateQueries({ queryKey: ['tasks'] });
+      queryClient.invalidateQueries({ queryKey: ['taskuntiltoday'] });
     },
     onError: (error: any) => {
       onShowNotification('error', 'Error deleting task');
@@ -161,16 +166,6 @@ export function TaskList({ selectedDate, tasks, isLoading, onShowNotification }:
     });
   };
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-lg font-medium text-blue-600">Loading tasks...</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <>

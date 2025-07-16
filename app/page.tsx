@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import { useState, useEffect } from 'react';
 import { Calendar } from '@/components/Calendar';
@@ -29,7 +29,7 @@ export default function Home() {
     scheduleDailyReminders();
     // Welcome message
     setTimeout(() => {
-      showTaskNotification('info', 'Welcome to Task Planner! 📋 Select a date to manage your tasks.');
+      showTaskNotification('info', "Welcome Ko Ko's Mee Mee Lay to Task Planner! 📋 Select a date to manage your tasks.");
     }, 1000);
   }, []);
 
