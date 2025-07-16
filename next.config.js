@@ -4,7 +4,7 @@ const nextConfig = {
     serverActions: true
   },
   swcMinify: false,
-  output: 'export',
+  // output: 'export',
   eslint: {
     ignoreDuringBuilds: true,
   },
