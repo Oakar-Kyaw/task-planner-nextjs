@@ -81,7 +81,7 @@ export function TaskList({ selectedDate, tasks, isLoading, onShowNotification }:
     },
     onError: (error: any) => {
       onShowNotification('error', 'Error updating task');
-      console.error('Error updating task:', error);
+     // console.error('Error updating task:', error);
     },
   });
 
@@ -98,7 +98,7 @@ export function TaskList({ selectedDate, tasks, isLoading, onShowNotification }:
     },
     onError: (error: any) => {
       onShowNotification('error', 'Error deleting task');
-      console.error('Error deleting task:', error);
+     // console.error('Error deleting task:', error);
     },
   });
 

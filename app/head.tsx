@@ -1,4 +1,4 @@
-// app/head.tsx
+"use client"
 export default function Head() {
     return (
       <>

@@ -5,7 +5,7 @@ import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle2, Clock, Target, TrendingUp } from 'lucide-react';
 import { Task, TaskStats } from '@/types';
-import { checkTwoDate } from '@/lib/utils';
+import { checkTwoDate } from '@/lib/monthutil';
 
 interface TaskStatsProps {
   dayTasks: Task[];
@@ -13,7 +13,6 @@ interface TaskStatsProps {
 }
 
 export function TaskStatsComponent({ dayTasks, selectedDate }: TaskStatsProps) {
-  console.log("dat",dayTasks)
   const getOverallStats = (): TaskStats => {
     const total = dayTasks.length;
     const completed = dayTasks.filter(task => task.completed).length;

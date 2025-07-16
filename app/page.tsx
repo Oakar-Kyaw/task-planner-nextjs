@@ -10,7 +10,7 @@ import { Task } from '@/types';
 import Image from 'next/image';
 import { getTasksAction } from '@/lib/taskServerAction';
 import { useQuery } from '@tanstack/react-query';
-import { getDaysInMonth } from '@/lib/utils';
+import { getDaysInMonth } from '@/lib/monthutil';
 export default function Home() {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
