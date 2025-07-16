@@ -295,6 +295,11 @@ export function TaskList({ selectedDate, tasks, isLoading, onShowNotification }:
                             })}
                           </p>
                         )}
+                        {
+                          task.completedTaskNotes && (
+                            <p className='text-md py-2 text-red-500'>{task.completedTaskNotes}</p>
+                          )
+                        }
                         <div className="flex items-center gap-4 text-xs text-muted-foreground">
                           <span className="flex items-center gap-1">
                             <Flag className="h-3 w-3" />
